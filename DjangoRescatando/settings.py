@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 import pymysql
 
@@ -25,7 +26,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.enviroment.get('SECRET_KEY', default = 'kwkwkkwkwkwkw2k2k23k2')
+SECRET_KEY = os.environ.get('SECRET_KEY', default = 'kwkwkkwkwkwkw2k2k23k2')
 
 DEBUG = 'RENDER' not in os.environ
 ALLOWED_HOSTS = []
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -54,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+    
 ROOT_URLCONF = 'DjangoRescatando.urls'
 
 TEMPLATES = [
@@ -80,18 +82,10 @@ WSGI_APPLICATION = 'DjangoRescatando.wsgi.application'
 import pymysql
 pymysql.install_as_MySQLdb()
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DJANGO_RESCATANDO',
-        'USER': 'root',
-        'PASSWORD': 'rescatando1',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset': 'utf8mb4',
-        },
-    }
+    'default': dj_database_url.config(    
+        default='sqlite://db.sqlite3',
+        conn_max_age=600 
+    )
 }
 
 
@@ -131,7 +125,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [STATIC_DIR]
-
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

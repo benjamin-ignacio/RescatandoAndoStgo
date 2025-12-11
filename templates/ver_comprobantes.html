@@ -13,7 +13,7 @@
       font-family: 'Chewy', cursive;
       margin: 0;
       padding: 0;
-      background-image: url('/media/animales/fondo.jpg');
+      background-image: url('{% static "animales/fondo.jpg" %}');
       background-size: 120px;
       background-repeat: repeat;
       min-height: 100vh;
@@ -149,7 +149,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="{% url 'index' %}">
-        <img src="/media/animales/logo.jpg" alt="Logo RescatandoAndo" class="logo-img">
+        <img src="{% static 'animales/logo.jpg' %}" alt="Logo RescatandoAndo" class="logo-img">
         RescatandoAndo 🐾
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

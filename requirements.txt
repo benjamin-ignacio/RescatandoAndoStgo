@@ -1,3 +1,17 @@
-...existing code...
+Django>=3.2,<5.0
+gunicorn
+dj-database-url
+whitenoise
+pymysql
 psycopg2-binary
+asgiref==3.9.1
+brotli==1.2.0
+charset-normalizer==3.4.4
+django-widget-tweaks==1.5.0
+mysqlclient==2.2.7
+packaging==25.0
+pillow==11.3.0
+reportlab==4.4.5
+sqlparse==0.5.3
+tzdata==2025.2
 # Agrega aquí otras dependencias si usas librerías externas

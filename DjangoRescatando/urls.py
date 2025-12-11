@@ -61,5 +61,4 @@ urlpatterns = [
     path('cambiar_rol/<int:usuario_id>/', views.cambiar_rol_usuario, name='cambiar_rol_usuario'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
